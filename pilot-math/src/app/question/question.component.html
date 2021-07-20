@@ -1,11 +1,13 @@
 <div class="card">
   <div class="card-body">
     <h5 class="card-title">Question #1</h5>
-    <p>What's the reciprocal of 123&deg; ?</p>
-    <form>
+    <p>{{questionText}}</p>
+    <form [formGroup]="answerForm" (ngSubmit)="submitAnswer()">
       <div class="form-group">
-        <input type="text" class="form-control" id="answer" placeholder="Your answer">
+        <input type="text" class="form-control" id="answer" placeholder="Your answer" formControlName="answer">
       </div>
     </form>
+    <p><strong>Correct</strong> {{correct}}</p>
+    <p><strong>Incorrect</strong> {{incorrect}}</p>
   </div>
 </div>
