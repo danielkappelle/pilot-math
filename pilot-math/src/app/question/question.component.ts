@@ -1,19 +1,19 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup } from "@angular/forms";
 
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html'
 })
 export class QuestionComponent implements OnInit {
-  public answerForm: FormGroup;
+  public answerForm: UntypedFormGroup;
   public questionText: string;
   public correctAnswer: number;
   public correct = 0;
   public incorrect = 0;
 
   constructor (
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {}
 
   ngOnInit(): void {
