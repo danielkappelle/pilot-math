@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { UntypedFormBuilder, UntypedFormGroup } from "@angular/forms";
+import { QuestionBase } from "./generation/question-base";
+import { FooQuestion } from "./generation/foo.question";
 
 @Component({
   selector: 'app-question',
@@ -8,9 +10,9 @@ import { UntypedFormBuilder, UntypedFormGroup } from "@angular/forms";
 export class QuestionComponent implements OnInit {
   public answerForm: UntypedFormGroup;
   public questionText: string;
-  public correctAnswer: number;
   public correct = 0;
   public incorrect = 0;
+  public currentQuestion: QuestionBase;
 
   constructor (
     private fb: UntypedFormBuilder
@@ -25,19 +27,16 @@ export class QuestionComponent implements OnInit {
   }
 
   createQuestion(): void {
-    const heading = Math.round(Math.random()*360);
-    this.questionText = `What's the reciprocal of ${heading}° ?`;
-    this.correctAnswer = (heading + 180) % 360;
+    this.currentQuestion = new FooQuestion();
+    this.questionText = this.currentQuestion.getQuestionText();
   }
 
   submitAnswer(): void {
     const value = this.answerForm.controls['answer'].value;
-    if (parseInt(value) === this.correctAnswer) {
-      console.log('good');
+    if (this.currentQuestion.gradeAnswer(value)) {
       this.correct++;
     } else {
       this.incorrect++;
-      console.log('not so good');
     }
 
     this.answerForm.controls['answer'].reset();

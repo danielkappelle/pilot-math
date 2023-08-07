@@ -7,7 +7,21 @@
         <input type="text" class="form-control" id="answer" placeholder="Your answer" formControlName="answer">
       </div>
     </form>
-    <p><strong>Correct</strong> {{correct}}</p>
-    <p><strong>Incorrect</strong> {{incorrect}}</p>
+    <table class="table table w-25 mt-3">
+      <tbody>
+        <tr>
+          <th>Correct</th>
+          <td>{{correct}}</td>
+        </tr>
+        <tr>
+          <th>Incorrect</th>
+          <td>{{incorrect}}</td>
+        </tr>
+        <tr>
+          <th>Score</th>
+          <td>{{correct / (correct+incorrect)*100 | number : '1.0-0'}}%</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
