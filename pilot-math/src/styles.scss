@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+$theme-colors: (
+  "primary": #0066FF,
+  "danger": #FF994D
+);
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+a {
+  color: map-get($theme-colors, "primary");
+  text-decoration: none;
+}
