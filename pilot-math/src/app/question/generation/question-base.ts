@@ -4,11 +4,17 @@ import { Injectable } from '@angular/core';
 export abstract class QuestionBase {
   constructor() {}
 
+  createQuestion(): void {}
+
   getQuestionText(): string {
-    return "";
+    return '';
   }
 
   gradeAnswer(val: string): boolean {
     return true;
+  }
+
+  getCorrectAnswer(): string {
+    return '';
   }
 }
