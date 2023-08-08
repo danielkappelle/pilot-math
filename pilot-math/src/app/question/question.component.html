@@ -1,27 +1,49 @@
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title">Question #1</h5>
-    <p>{{ questionText }}</p>
-    <form [formGroup]="answerForm" (ngSubmit)="submitAnswer()">
-      <div class="form-group">
-        <input
+<div class="d-flex flex-row justify-content-between">
+  <div class="card flex-grow-1 me-3">
+    <div class="card-body">
+      <h5 class="card-title">Vraag</h5>
+      <p>{{ questionText }}</p>
+      <form [formGroup]="answerForm" (ngSubmit)="submitAnswer()">
+        <div class="form-group">
+          <input
           type="text"
           class="form-control"
           id="answer"
           placeholder="Your answer"
           formControlName="answer"
-        />
-      </div>
-    </form>
+          />
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Vraagtypes</h5>
+      <form [formGroup]="questionTypesForm">
+        <div class="form-check" *ngFor="let control of typeControls; let i = index">
+          <input class="form-check-input" type="checkbox" id="type-check-{{i}}" [formControl]="control">
+          <label class="form-check-label" for="type-check-{{i}}">
+            {{questions[i].questionName}}
+          </label>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 
-<div class="card text-bg-danger mt-3 mb-3" *ngIf="incorrectQuestionText">
+<div
+  class="card mt-3 mb-3"
+  [ngClass]="{
+    'text-bg-danger': lastQuestion?.correct === false,
+    'text-bg-success': lastQuestion?.correct
+  }"
+  *ngIf="lastQuestion"
+>
   <div class="card-body">
-    <h5 class="card-title">Fout!</h5>
-    <h6 class="card-subtitle mb-2">{{ incorrectQuestionText }}</h6>
+    <h5 class="card-title">{{ lastQuestion.correct ? "Goed!" : "Fout!" }}</h5>
+    <h6 class="card-subtitle mb-2">{{ lastQuestion.text }}</h6>
     <p class="card-text">
-      {{ incorrectQuestionAnswer }}
+      {{ lastQuestion.correctAnswer }}
     </p>
   </div>
 </div>

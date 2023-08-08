@@ -1,6 +1,8 @@
 import { QuestionBase } from './question-base';
 
 export class Convert1Question extends QuestionBase {
+  questionName = "Conversion 1";
+
   qtyLiter: number;
   density: number;
   mass: number;

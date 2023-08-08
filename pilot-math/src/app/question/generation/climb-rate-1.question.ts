@@ -1,6 +1,8 @@
 import { QuestionBase } from './question-base';
 
 export class ClimbRate1Question extends QuestionBase {
+  questionName = "Climb rate 1";
+
   climbRateFtMin: number;
   climbFromFt: number;
   climbToFt: number;
@@ -26,6 +28,8 @@ export class ClimbRate1Question extends QuestionBase {
   }
 
   getCorrectAnswer(): string {
-    return `${this.timeMinutes.toFixed(0)} min`;
+    const min = Math.floor(this.timeMinutes);
+    const sec = Math.round((this.timeMinutes * 60) % 60);
+    return `${min} min ${sec} sec`;
   }
 }

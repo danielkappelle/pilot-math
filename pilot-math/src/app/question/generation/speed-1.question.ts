@@ -1,6 +1,8 @@
 import { QuestionBase } from './question-base';
 
 export class Speed1Question extends QuestionBase {
+  questionName = "Speed 1";
+  
   gsKnots: number;
   timeMinutes: number;
   distanceNm: number;
@@ -20,6 +22,6 @@ export class Speed1Question extends QuestionBase {
   }
 
   getCorrectAnswer(): string {
-    return this.distanceNm.toFixed(1);
+    return `${this.distanceNm.toFixed(1)} NM`;
   }
 }

@@ -1,10 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import {
+  FormArray,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+} from '@angular/forms';
 import { QuestionBase } from './generation/question-base';
 import { Convert2Question } from './generation/convert-2.question';
 import { Convert1Question } from './generation/convert-1.question';
 import { Speed1Question } from './generation/speed-1.question';
 import { ClimbRate1Question } from './generation/climb-rate-1.question';
+
+interface LastQuestion {
+  text?: string;
+  correctAnswer?: string;
+  correct?: boolean;
+}
 
 @Component({
   selector: 'app-question',
@@ -13,15 +23,20 @@ import { ClimbRate1Question } from './generation/climb-rate-1.question';
 })
 export class QuestionComponent implements OnInit {
   public answerForm: UntypedFormGroup;
+  public questionTypesForm: UntypedFormGroup;
+
   public questionText: string;
   public correct = 0;
   public incorrect = 0;
   public currentQuestion: QuestionBase;
   public questions: QuestionBase[] = [];
-  public incorrectQuestionText: string;
-  public incorrectQuestionAnswer: string;
+  public lastQuestion: LastQuestion;
 
   constructor(private fb: UntypedFormBuilder) {}
+
+  get typeControls() {
+    return (this.questionTypesForm.controls['types'] as FormArray).controls;
+  }
 
   ngOnInit(): void {
     this.answerForm = this.fb.group({
@@ -33,27 +48,43 @@ export class QuestionComponent implements OnInit {
     this.questions.push(new Speed1Question());
     this.questions.push(new ClimbRate1Question());
 
+    this.questionTypesForm = this.fb.group({
+      types: this.fb.array(this.questions.map(() => true)),
+    });
+
     this.createQuestion();
   }
 
   createQuestion(): void {
+    // Filter selected questions
+    const filteredTypes = this.typeControls
+      .map((control, idx) => ({ idx, val: control.value }))
+      .filter((control) => control.val)
+      .map((control) => this.questions[control.idx]);
+
+    if (!filteredTypes.length) {
+      return;
+    }
+
     this.currentQuestion =
-      this.questions[Math.floor(Math.random() * this.questions.length)];
-    console.log(this.currentQuestion);
+      filteredTypes[Math.floor(Math.random() * filteredTypes.length)];
     this.currentQuestion.createQuestion();
     this.questionText = this.currentQuestion.getQuestionText();
   }
 
   submitAnswer(): void {
     const value = this.answerForm.controls['answer'].value;
+    this.lastQuestion = {
+      text: this.currentQuestion.getQuestionText(),
+      correctAnswer: this.currentQuestion.getCorrectAnswer(),
+    };
+
     if (this.currentQuestion.gradeAnswer(value)) {
       this.correct++;
-      this.incorrectQuestionText = undefined;
-      this.incorrectQuestionAnswer = undefined;
+      this.lastQuestion.correct = true;
     } else {
       this.incorrect++;
-      this.incorrectQuestionText = this.currentQuestion.getQuestionText();
-      this.incorrectQuestionAnswer = this.currentQuestion.getCorrectAnswer();
+      this.lastQuestion.correct = false;
     }
 
     this.answerForm.controls['answer'].reset();
