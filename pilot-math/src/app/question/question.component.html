@@ -57,7 +57,8 @@
     <h5 class="card-title">{{ lastQuestion.correct ? "Goed!" : "Fout!" }}</h5>
     <h6 class="card-subtitle mb-2">{{ lastQuestion.text }}</h6>
     <p class="card-text">
-      {{ lastQuestion.correctAnswer }}
+      Goede antwoord: {{ lastQuestion.correctAnswer }}<br />
+      Uw antwoord: {{lastQuestion.givenAnswer }}
     </p>
   </div>
 </div>

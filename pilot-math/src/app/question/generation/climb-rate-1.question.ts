@@ -20,11 +20,13 @@ export class ClimbRate1Question extends QuestionBase {
   }
 
   getQuestionText(): string {
-    return `Een vliegtuig heeft een climb rate van ${this.climbRateFtMin} ft/min. Hoeveel minuten duurt het om te klimmen van ${this.climbFromFt} ft naar ${this.climbToFt} ft?`;
+    return `Een vliegtuig heeft een climb rate van ${this.climbRateFtMin} ft/min. Hoe lang duurt het om te klimmen van ${this.climbFromFt} ft naar ${this.climbToFt} ft? Geef het antwoord als mm:ss`;
   }
 
   gradeAnswer(val: string): boolean {
-    return Math.abs(parseFloat(val) - this.timeMinutes) < 1;
+    const mins = parseInt(val.split(':')[0]);
+    const secs = parseInt(val.split(':')[1]);
+    return Math.abs(mins+secs/60 - this.timeMinutes) < 1;
   }
 
   getCorrectAnswer(): string {

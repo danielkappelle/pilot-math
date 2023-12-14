@@ -18,7 +18,7 @@ export class Speed1Question extends QuestionBase {
   }
 
   gradeAnswer(val: string): boolean {
-    return Math.abs(parseFloat(val) - this.distanceNm) < 1;
+    return Math.abs(parseFloat(val) - this.distanceNm) < 2;
   }
 
   getCorrectAnswer(): string {

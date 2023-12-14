@@ -14,6 +14,7 @@ interface LastQuestion {
   text?: string;
   correctAnswer?: string;
   correct?: boolean;
+  givenAnswer?: string;
 }
 
 @Component({
@@ -77,6 +78,7 @@ export class QuestionComponent implements OnInit {
     this.lastQuestion = {
       text: this.currentQuestion.getQuestionText(),
       correctAnswer: this.currentQuestion.getCorrectAnswer(),
+      givenAnswer: value
     };
 
     if (this.currentQuestion.gradeAnswer(value)) {
