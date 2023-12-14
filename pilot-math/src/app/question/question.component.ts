@@ -15,6 +15,7 @@ import { Time1Question } from './generation/time-1.question';
 import { MultiDistance1Question } from './generation/multiple-distances-1.question';
 import { FuelFlow1Question } from './generation/fuelflow-1.question';
 import { FuelFlow2Question } from './generation/fuelflow-2.question';
+import { FuelFlow3Question } from './generation/fuelflow-3.question';
 
 interface LastQuestion {
   text?: string;
@@ -60,6 +61,7 @@ export class QuestionComponent implements OnInit {
     this.questions.push(new MultiDistance1Question());
     this.questions.push(new FuelFlow1Question());
     this.questions.push(new FuelFlow2Question());
+    this.questions.push(new FuelFlow3Question());
 
     this.questionTypesForm = this.fb.group({
       types: this.fb.array(this.questions.map(() => true)),
