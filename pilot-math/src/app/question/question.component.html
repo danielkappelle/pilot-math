@@ -35,8 +35,8 @@
       <h5 class="card-title">Vraagtypes</h5>
       <form [formGroup]="questionTypesForm">
         <div class="form-check" *ngFor="let control of typeControls; let i = index">
-          <input class="form-check-input" type="checkbox" id="type-check-{{i}}" [formControl]="control">
-          <label class="form-check-label" for="type-check-{{i}}">
+          <input class="form-check-input" type="checkbox" id="type-check-2-{{i}}" [formControl]="control">
+          <label class="form-check-label" for="type-check-2-{{i}}">
             {{questions[i].questionName}}
           </label>
         </div>
