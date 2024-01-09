@@ -25,7 +25,12 @@
 <div class="d-flex flex-row justify-content-between">
   <div class="card flex-grow-1">
     <div class="card-body">
-      <h5 class="card-title">Vraag</h5>
+      <h5 class="card-title">
+        Vraag
+        <small class="text-muted"
+          >({{ this.currentQuestion.questionName }})</small
+        >
+      </h5>
       <p>{{ questionText }}</p>
       <form [formGroup]="answerForm" (ngSubmit)="submitAnswer()">
         <div class="form-group">
