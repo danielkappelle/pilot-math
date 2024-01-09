@@ -22,12 +22,14 @@ import { Descent1Question } from './generation/descent-1.question';
 import { Descent2Question } from './generation/descent-2.question';
 import { FlowFactor1Question } from './generation/flowfactor-1.question';
 import { LandingFactor1Question } from './generation/landingfactor-1.question';
+import { Wca1Question } from './generation/wca-1.question';
 
 interface LastQuestion {
   text?: string;
   correctAnswer?: string;
   correct?: boolean;
   givenAnswer?: string;
+  questionName?: string;
 }
 
 @Component({
@@ -74,6 +76,7 @@ export class QuestionComponent implements OnInit {
     this.questions.push(new Descent2Question());
     this.questions.push(new FlowFactor1Question());
     this.questions.push(new LandingFactor1Question());
+    this.questions.push(new Wca1Question());
 
     this.questionTypesForm = this.fb.group({
       types: this.fb.array(this.questions.map(() => true)),
@@ -105,6 +108,7 @@ export class QuestionComponent implements OnInit {
       text: this.currentQuestion.getQuestionText(),
       correctAnswer: this.currentQuestion.getCorrectAnswer(),
       givenAnswer: value,
+      questionName: this.currentQuestion.questionName,
     };
 
     if (this.currentQuestion.gradeAnswer(value)) {

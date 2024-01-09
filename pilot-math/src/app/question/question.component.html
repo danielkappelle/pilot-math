@@ -27,9 +27,7 @@
     <div class="card-body">
       <h5 class="card-title">
         Vraag
-        <small class="text-muted"
-          >({{ this.currentQuestion.questionName }})</small
-        >
+        <small class="text-muted">({{ currentQuestion.questionName }})</small>
       </h5>
       <p>{{ questionText }}</p>
       <form [formGroup]="answerForm" (ngSubmit)="submitAnswer()">
@@ -83,7 +81,10 @@
   *ngIf="lastQuestion"
 >
   <div class="card-body">
-    <h5 class="card-title">{{ lastQuestion.correct ? 'Goed!' : 'Fout!' }}</h5>
+    <h5 class="card-title">
+      {{ lastQuestion.correct ? 'Goed!' : 'Fout!' }}
+      <small class="text-muted">({{ lastQuestion.questionName }})</small>
+    </h5>
     <h6 class="card-subtitle mb-2">{{ lastQuestion.text }}</h6>
     <p class="card-text">
       Goede antwoord: {{ lastQuestion.correctAnswer }}<br />

@@ -47,6 +47,6 @@ export class DescentDistance1Question extends QuestionBase {
   }
 
   getCorrectAnswer(): string {
-    return `${this.groundDistanceNm} NM`;
+    return `${this.groundDistanceNm.toFixed(0)} NM`;
   }
 }

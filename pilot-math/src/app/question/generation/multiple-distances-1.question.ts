@@ -45,8 +45,13 @@ export class MultiDistance1Question {
   }
 
   gradeAnswer(val: string): boolean {
-    const hr = parseInt(val.split(':')[0]);
-    const min = parseInt(val.split(':')[1]);
+    let hr, min: number;
+    try {
+      hr = parseInt(val.split(':')[0]);
+      min = parseInt(val.split(':')[1]);
+    } catch {
+      return false;
+    }
     return (
       Math.abs(
         hr * 60 + min - (this.arrivalTimeHr * 60 + this.arrivalTimeMin),
