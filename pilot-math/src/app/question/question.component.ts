@@ -24,7 +24,8 @@ import { FlowFactor1Question } from './generation/flowfactor-1.question';
 import { LandingFactor1Question } from './generation/landingfactor-1.question';
 import { Wca1Question } from './generation/wca-1.question';
 import { Wca2Question } from './generation/wca-2.question';
-import { Cwc1Question } from './generation/cwc-2.question';
+import { Cwc1Question } from './generation/cwc-1.question';
+import { Twc1Question } from './generation/twc-1.question';
 
 interface LastQuestion {
   text?: string;
@@ -81,6 +82,7 @@ export class QuestionComponent implements OnInit {
     this.questions.push(new Wca1Question());
     this.questions.push(new Wca2Question());
     this.questions.push(new Cwc1Question());
+    this.questions.push(new Twc1Question());
 
     this.questionTypesForm = this.fb.group({
       types: this.fb.array(this.questions.map(() => true)),

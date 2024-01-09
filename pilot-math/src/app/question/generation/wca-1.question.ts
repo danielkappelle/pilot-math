@@ -27,7 +27,11 @@ export class Wca1Question extends QuestionBase {
   }
 
   getQuestionText(): string {
-    return `De runway heading is ${this.rwyHdg}°. De w/v is ${this.windHdg}°/${this.windKts} kt. De TAS is ${this.tasKts} kts. Wat wordt de magnetic heading bij de nadering?`;
+    return `De runway heading is ${pad(this.rwyHdg, 3)}°. De w/v is ${
+      this.windHdg
+    }°/${this.windKts} kt. De TAS is ${
+      this.tasKts
+    } kts. Wat wordt de magnetic heading bij de nadering?`;
   }
 
   gradeAnswer(val: string): boolean {
