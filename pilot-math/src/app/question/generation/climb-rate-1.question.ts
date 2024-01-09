@@ -1,7 +1,7 @@
 import { QuestionBase } from './question-base';
 
 export class ClimbRate1Question extends QuestionBase {
-  questionName = "Climb rate 1";
+  questionName = 'Climb rate 1';
 
   climbRateFtMin: number;
   climbFromFt: number;
@@ -24,9 +24,13 @@ export class ClimbRate1Question extends QuestionBase {
   }
 
   gradeAnswer(val: string): boolean {
-    const mins = parseInt(val.split(':')[0]);
-    const secs = parseInt(val.split(':')[1]);
-    return Math.abs(mins+secs/60 - this.timeMinutes) < 1;
+    try {
+      const mins = parseInt(val.split(':')[0]);
+      const secs = parseInt(val.split(':')[1]);
+      return Math.abs(mins + secs / 60 - this.timeMinutes) < 1;
+    } catch {
+      return false;
+    }
   }
 
   getCorrectAnswer(): string {

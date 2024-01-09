@@ -39,9 +39,13 @@ export class Time1Question extends QuestionBase {
   }
 
   gradeAnswer(val: string): boolean {
-    const hr = parseInt(val.split(':')[0]);
-    const min = parseInt(val.split(':')[1]);
-    return hr * 60 + min === this.arrivalTimeHr * 60 + this.arrivalTimeMin;
+    try {
+      const hr = parseInt(val.split(':')[0]);
+      const min = parseInt(val.split(':')[1]);
+      return hr * 60 + min === this.arrivalTimeHr * 60 + this.arrivalTimeMin;
+    } catch {
+      return false;
+    }
   }
 
   getCorrectAnswer(): string {

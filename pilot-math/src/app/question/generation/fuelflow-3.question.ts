@@ -23,9 +23,13 @@ export class FuelFlow3Question extends QuestionBase {
   }
 
   gradeAnswer(val: string): boolean {
-    const hrs = parseInt(val.split(':')[0]);
-    const mins = parseInt(val.split(':')[1]);
-    return Math.abs(hrs + mins / 60 - this.timeLeftHr) < 10 / 60;
+    try {
+      const hrs = parseInt(val.split(':')[0]);
+      const mins = parseInt(val.split(':')[1]);
+      return Math.abs(hrs + mins / 60 - this.timeLeftHr) < 10 / 60;
+    } catch {
+      return false;
+    }
   }
 
   getCorrectAnswer(): string {
