@@ -21,6 +21,7 @@ import { FuelFlow5Question } from './generation/fuelflow-5.question';
 import { Descent1Question } from './generation/descent-1.question';
 import { Descent2Question } from './generation/descent-2.question';
 import { FlowFactor1Question } from './generation/flowfactor-1.question';
+import { LandingFactor1Question } from './generation/landingfactor-1.question';
 
 interface LastQuestion {
   text?: string;
@@ -72,6 +73,7 @@ export class QuestionComponent implements OnInit {
     this.questions.push(new Descent1Question());
     this.questions.push(new Descent2Question());
     this.questions.push(new FlowFactor1Question());
+    this.questions.push(new LandingFactor1Question());
 
     this.questionTypesForm = this.fb.group({
       types: this.fb.array(this.questions.map(() => true)),
