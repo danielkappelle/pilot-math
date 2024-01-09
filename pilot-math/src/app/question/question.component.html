@@ -1,11 +1,21 @@
 <div class="card mb-3 d-block d-md-none">
   <div class="card-body">
     <h5 class="card-title">Vraagtypes</h5>
+    <button class="btn btn-primary">Alles selecteren</button>
+    <button class="btn btn-primary">Alles deselecteren</button>
     <form [formGroup]="questionTypesForm">
-      <div class="form-check" *ngFor="let control of typeControls; let i = index">
-        <input class="form-check-input" type="checkbox" id="type-check-{{i}}" [formControl]="control">
-        <label class="form-check-label" for="type-check-{{i}}">
-          {{questions[i].questionName}}
+      <div
+        class="form-check"
+        *ngFor="let control of typeControls; let i = index"
+      >
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="type-check-{{ i }}"
+          [formControl]="control"
+        />
+        <label class="form-check-label" for="type-check-{{ i }}">
+          {{ questions[i].questionName }}
         </label>
       </div>
     </form>
@@ -20,11 +30,11 @@
       <form [formGroup]="answerForm" (ngSubmit)="submitAnswer()">
         <div class="form-group">
           <input
-          type="text"
-          class="form-control"
-          id="answer"
-          placeholder="Your answer"
-          formControlName="answer"
+            type="text"
+            class="form-control"
+            id="answer"
+            placeholder="Your answer"
+            formControlName="answer"
           />
         </div>
       </form>
@@ -33,11 +43,25 @@
   <div class="card ms-3 d-none d-md-block">
     <div class="card-body">
       <h5 class="card-title">Vraagtypes</h5>
+      <button class="btn btn-link btn-sm" (click)="selectAll()">
+        Alles selecteren
+      </button>
+      <button class="btn btn-link btn-sm" (click)="deselectAll()">
+        Alles deselecteren
+      </button>
       <form [formGroup]="questionTypesForm">
-        <div class="form-check" *ngFor="let control of typeControls; let i = index">
-          <input class="form-check-input" type="checkbox" id="type-check-2-{{i}}" [formControl]="control">
-          <label class="form-check-label" for="type-check-2-{{i}}">
-            {{questions[i].questionName}}
+        <div
+          class="form-check"
+          *ngFor="let control of typeControls; let i = index"
+        >
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="type-check-2-{{ i }}"
+            [formControl]="control"
+          />
+          <label class="form-check-label" for="type-check-2-{{ i }}">
+            {{ questions[i].questionName }}
           </label>
         </div>
       </form>
@@ -54,11 +78,11 @@
   *ngIf="lastQuestion"
 >
   <div class="card-body">
-    <h5 class="card-title">{{ lastQuestion.correct ? "Goed!" : "Fout!" }}</h5>
+    <h5 class="card-title">{{ lastQuestion.correct ? 'Goed!' : 'Fout!' }}</h5>
     <h6 class="card-subtitle mb-2">{{ lastQuestion.text }}</h6>
     <p class="card-text">
       Goede antwoord: {{ lastQuestion.correctAnswer }}<br />
-      Uw antwoord: {{lastQuestion.givenAnswer }}
+      Uw antwoord: {{ lastQuestion.givenAnswer }}
     </p>
   </div>
 </div>
@@ -75,7 +99,7 @@
     </tr>
     <tr>
       <th>Score</th>
-      <td>{{ (correct / (correct + incorrect)) * 100 | number : "1.0-0" }}%</td>
+      <td>{{ (correct / (correct + incorrect)) * 100 | number: '1.0-0' }}%</td>
     </tr>
   </tbody>
 </table>
