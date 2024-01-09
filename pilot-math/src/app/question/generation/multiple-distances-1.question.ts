@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { pad, randomNumber } from '../helpers';
+import { QuestionBase } from './question-base';
 
 @Injectable()
-export class MultiDistance1Question {
+export class MultiDistance1Question extends QuestionBase {
   questionName = 'Multiple distances 1';
 
   takeOffHr: number;

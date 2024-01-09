@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { pad, randomNumber } from '../helpers';
+import { QuestionBase } from './question-base';
 
 @Injectable()
-export class FuelFlow3Question {
+export class FuelFlow3Question extends QuestionBase {
   questionName = 'Fuel flow 3';
 
   fuelLeftL: number;

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { pad, randomNumber } from '../helpers';
+import { QuestionBase } from './question-base';
 
 @Injectable()
-export class Descent2Question {
+export class Descent2Question extends QuestionBase {
   questionName = 'Descent 2';
 
   rodFpm: number;
