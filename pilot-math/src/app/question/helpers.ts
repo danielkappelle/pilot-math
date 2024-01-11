@@ -6,3 +6,13 @@ export function randomNumber(from: number, to: number, step: number = 1) {
 export function pad(num, n: number = 2) {
   return String(num).padStart(n, '0');
 }
+
+export function toAngle(a: number) {
+  return (a + 360) % 360;
+}
+
+export function compareAngles(a: number, b: number, tolerance: number) {
+  a = (a + 360) % 360;
+  b = (b + 360) % 360;
+  return Math.abs(a - b) < tolerance || Math.abs(a + 360 - b) < tolerance;
+}

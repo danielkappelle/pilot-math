@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { pad, randomNumber } from '../helpers';
+import { compareAngles, pad, randomNumber, toAngle } from '../helpers';
 import { QuestionBase } from './question-base';
 
 @Injectable()
@@ -23,7 +23,7 @@ export class Wca1Question extends QuestionBase {
     const xwc =
       this.windKts * Math.sin(((this.windHdg - this.rwyHdg) / 180) * Math.PI);
     const wca = xwc / speedFactor;
-    this.landingHdg = (this.rwyHdg + wca) % 360;
+    this.landingHdg = toAngle(this.rwyHdg + wca);
   }
 
   getQuestionText(): string {
@@ -35,7 +35,7 @@ export class Wca1Question extends QuestionBase {
   }
 
   gradeAnswer(val: string): boolean {
-    return Math.abs(parseFloat(val) - this.landingHdg) < 5;
+    return compareAngles(parseFloat(val), this.landingHdg, 5);
   }
 
   getCorrectAnswer(): string {
