@@ -43,7 +43,7 @@ export class DescentDistance1Question extends QuestionBase {
   }
 
   gradeAnswer(val: string): boolean {
-    return Math.abs(parseFloat(val) - this.timeMinutes) < 1;
+    return Math.abs(parseFloat(val) - this.groundDistanceNm) < 1;
   }
 
   getCorrectAnswer(): string {
