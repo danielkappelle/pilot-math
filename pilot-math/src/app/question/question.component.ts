@@ -26,6 +26,8 @@ import { Wca1Question } from './generation/wca-1.question';
 import { Wca2Question } from './generation/wca-2.question';
 import { Cwc1Question } from './generation/cwc-1.question';
 import { Twc1Question } from './generation/twc-1.question';
+import { Rate1TurnQuestion } from './generation/rate-1-turn.question';
+import { debounceTime } from 'rxjs/operators';
 
 interface LastQuestion {
   text?: string;
@@ -83,10 +85,30 @@ export class QuestionComponent implements OnInit {
     this.questions.push(new Wca2Question());
     this.questions.push(new Cwc1Question());
     this.questions.push(new Twc1Question());
+    this.questions.push(new Rate1TurnQuestion());
+
+    let selection = [];
+    let selectionFromLocalStorage = JSON.parse(
+      localStorage.getItem('selected-types') || '[]',
+    );
+    if (
+      selectionFromLocalStorage.length &&
+      selectionFromLocalStorage.filter((x) => x).length
+    ) {
+      selection = JSON.parse(localStorage.getItem('selected-types'));
+    } else {
+      selection = this.questions.map(() => true);
+    }
 
     this.questionTypesForm = this.fb.group({
-      types: this.fb.array(this.questions.map(() => true)),
+      types: this.fb.array(selection),
     });
+
+    this.questionTypesForm.valueChanges
+      .pipe(debounceTime(100))
+      .subscribe((val) =>
+        localStorage.setItem('selected-types', JSON.stringify(val.types)),
+      );
 
     this.createQuestion();
   }
