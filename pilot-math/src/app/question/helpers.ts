@@ -11,6 +11,11 @@ export function toAngle(a: number) {
   return (a + 360) % 360;
 }
 
+export function angleDiff(a: number, b: number) {
+  const diff = Math.abs(a - b);
+  return diff > 180 ? 360 - diff : diff;
+}
+
 export function compareAngles(a: number, b: number, tolerance: number) {
   a = (a + 360) % 360;
   b = (b + 360) % 360;

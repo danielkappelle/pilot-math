@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
-import { compareAngles, pad, randomNumber, toAngle } from '../helpers';
+import {
+  angleDiff,
+  compareAngles,
+  pad,
+  randomNumber,
+  toAngle,
+} from '../helpers';
 import { QuestionBase } from './question-base';
 
 @Injectable()
@@ -14,12 +20,12 @@ export class Rate1TurnQuestion extends QuestionBase {
   createQuestion(): void {
     this.currentHdg = randomNumber(0, 360, 1);
     this.desiredHdg = randomNumber(0, 360, 10);
-    this.hdgDiff = toAngle(this.currentHdg - this.desiredHdg);
+    this.hdgDiff = angleDiff(this.currentHdg, this.desiredHdg);
     this.timeSeconds = this.hdgDiff / 3;
   }
 
   getQuestionText(): string {
-    return `HDG: ${this.currentHdg}º, maak een Rate 1 bocht naar ${this.desiredHdg}. Hoeveel seconden?`;
+    return `HDG: ${this.currentHdg}º, maak een Rate 1 bocht naar ${this.desiredHdg}º. Hoeveel seconden?`;
   }
 
   gradeAnswer(val: string): boolean {
